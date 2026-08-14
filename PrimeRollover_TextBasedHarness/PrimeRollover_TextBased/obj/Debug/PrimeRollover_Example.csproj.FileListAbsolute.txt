@@ -1,0 +1,8 @@
+D:\VSProjects2019\PrimeRollover_Example\bin\Debug\PrimeRollover_Example.exe
+D:\VSProjects2019\PrimeRollover_Example\bin\Debug\PrimeRollover_Example.pdb
+D:\VSProjects2019\PrimeRollover_Example\obj\Debug\PrimeRollover_Example.Form1.resources
+D:\VSProjects2019\PrimeRollover_Example\obj\Debug\PrimeRollover_Example.Properties.Resources.resources
+D:\VSProjects2019\PrimeRollover_Example\obj\Debug\PrimeRollover_Example.csproj.GenerateResource.cache
+D:\VSProjects2019\PrimeRollover_Example\obj\Debug\PrimeRollover_Example.csproj.CoreCompileInputs.cache
+D:\VSProjects2019\PrimeRollover_Example\obj\Debug\PrimeRollover_Example.exe
+D:\VSProjects2019\PrimeRollover_Example\obj\Debug\PrimeRollover_Example.pdb
