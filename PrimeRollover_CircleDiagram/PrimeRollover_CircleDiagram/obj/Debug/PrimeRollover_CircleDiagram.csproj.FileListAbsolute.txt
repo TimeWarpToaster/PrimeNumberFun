@@ -1,0 +1,17 @@
+D:\VSProjects2019\PrimeRollover_CircleDiagram\bin\Debug\PrimeRollover_CircleDiagram.exe
+D:\VSProjects2019\PrimeRollover_CircleDiagram\bin\Debug\PrimeRollover_CircleDiagram.pdb
+D:\VSProjects2019\PrimeRollover_CircleDiagram\obj\Debug\PrimeRollover_CircleDiagram.csproj.AssemblyReference.cache
+D:\VSProjects2019\PrimeRollover_CircleDiagram\obj\Debug\ColorOptions.g.cs
+D:\VSProjects2019\PrimeRollover_CircleDiagram\obj\Debug\MainWindow.g.cs
+D:\VSProjects2019\PrimeRollover_CircleDiagram\obj\Debug\App.g.cs
+D:\VSProjects2019\PrimeRollover_CircleDiagram\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\VSProjects2019\PrimeRollover_CircleDiagram\obj\Debug\PrimeRollover_CircleDiagram_MarkupCompile.cache
+D:\VSProjects2019\PrimeRollover_CircleDiagram\obj\Debug\PrimeRollover_CircleDiagram_MarkupCompile.lref
+D:\VSProjects2019\PrimeRollover_CircleDiagram\obj\Debug\ColorOptions.baml
+D:\VSProjects2019\PrimeRollover_CircleDiagram\obj\Debug\MainWindow.baml
+D:\VSProjects2019\PrimeRollover_CircleDiagram\obj\Debug\PrimeRollover_CircleDiagram.g.resources
+D:\VSProjects2019\PrimeRollover_CircleDiagram\obj\Debug\PrimeRollover_CircleDiagram.Properties.Resources.resources
+D:\VSProjects2019\PrimeRollover_CircleDiagram\obj\Debug\PrimeRollover_CircleDiagram.csproj.GenerateResource.cache
+D:\VSProjects2019\PrimeRollover_CircleDiagram\obj\Debug\PrimeRollover_CircleDiagram.csproj.CoreCompileInputs.cache
+D:\VSProjects2019\PrimeRollover_CircleDiagram\obj\Debug\PrimeRollover_CircleDiagram.exe
+D:\VSProjects2019\PrimeRollover_CircleDiagram\obj\Debug\PrimeRollover_CircleDiagram.pdb
