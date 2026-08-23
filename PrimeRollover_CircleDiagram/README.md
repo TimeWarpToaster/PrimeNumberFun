@@ -1,5 +1,7 @@
 # Prime Rollover - Circle Diagram
 
+### Photo Sensitive Viewer Warning:  This app uses alternating colors to draw complex patterns, sometimes rapidly. This can lead to periodic flashes of contrast. Photo sensitive viewers should not use this app, or build their own sources with a slower starting draw speed.
+
 The purpose of this app, is to visually illustrate Prime Rollover as a product of the indivisibility of primes. In default configuration, each color represents attempting to divide the prime by a different value.
 
 Instructions are included in-app, along with a rough description of what is being shown. For executables only, download the files and images from the directory marked "RunFolder", the other app-named directory contains buildable C# sources for this WPF application.
