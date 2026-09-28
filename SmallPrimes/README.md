@@ -4,4 +4,4 @@ A couple years ago, I accidentally built an Eratosthenes' Sieve. I did not know 
 
 Just the same, the Prime Number Fun repo was seeming bare without actual prime numbers.
 
-In this folder, you will find four files of interest. Each file focuses on a single kind of prime number (i.e. primes ending with 1, primes ending with 3, 7, and 9), and contains all such prime numbers smaller than 10-Million in the order of occurrence. The text file can be parsed on whitespace fairly easy. The equivalent html file is really just an html table containing the same, for local browser viewing.
+In this folder, you will find four files of interest. Each file focuses on a single kind of prime number (i.e. primes ending with 1, primes ending with 3, 7, and 9), and contains all such prime numbers smaller than 10-Million in the order of occurrence. The text file can be parsed on whitespace fairly easy. The equivalent html file is really just an html table containing the same, for local browser viewing. The html files have an extra extension of .txt, to help the repo classification. Simply rename and remove the .txt suffix before, before viewing the HTMLs. 
