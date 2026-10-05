@@ -1,4 +1,5 @@
-Posting small documentation for future use. If and when I clean up the old harness app, it will be sieve only. Some comments here delve into math behind the sieve, or merging of rays. These things are not directly part of any output, and are largely considered unimportant under the hood, though the do exist and get computed. Like I said, sieve only :(  Sources not posted yet, maybe next week.
+Some comments here delve into math behind the sieve, or merging of rays. These things are not directly part of any output, and are largely considered unimportant under the hood, though the do exist and get computed. Sieve only :(  
+
 
 # Eratosthenes Sieve By Kind
 
@@ -54,13 +55,19 @@ I do not know for sure, but I suspect there are special occurrences, where multi
 
 ## Basic Usage
 
-The app is UI bound, meaning it will cease functioning from the user-perspective, until it has finished processing. I wasn't worried about it, because this one was just for fun.
+<img src="./Images/Screenshot_Whole.png" />
+
+Important fields getting started are Max (at the top), which sets the size of the array to process, and Kind (at the bottom), which enables checkboxes for specific sets of functions to run against one-kind of number: ...1, ...3, ...7, or ...9. Running all four functions for a kind, will find all prime numbers of that kind, upto Max * 10. Remember, max is the size of the array, where the numbers are a power of ten larger.
+
+Window settings control which portion of results will be in view. Sorry, it is not readily reloadable. The UI will reliably handle 1M values displayed, beyond that things can slow. Use Window Start and Window Size, to determine where display should begin, and how many to show. Window Width is more interesting. Depending upon the functions you are running, window width can be modified to represent powers of 10 or common multiples, to manipulate the paths of rays without changing accuracy of output. It is an optical patterning thing.
+
+Go is the first option of buttons, it will run only the selected functions for the selected kind, and display results. Merge List, will run all functions, for all kinds, merge their results, and output a plain-text file of primes (at the expense of running over four-times longer). Well, upto int 32, or while memory holds out. The files get large and useless quickly. This is really meant for study.
 
 It will eventually finish, if allowed to. That's what it does. Personally, I do not recommend looking for anything larger than the first 10-million or so of a Kind. Anything beyond that, runs out of scope for what is feasible. 
 
-It is important to note, the question being asked is how large the array should be, when finding primes. Because the array is based on a Kind, this means the numbers searched are roughly 10-times larger. For instance, an array with 100,000 numbers in it, of Kind-1, counting by ten, contains all numbers ending with 1, from 1 - 999,991. Essentially, multiply the array size by ten, and you get everything smaller than that. 
+Numbers to the left of data in the display, are not-quite row-numbers, they are the last numeric value that falls in a given row. 
 
-The workload does bog-down as size increases. This should be due largely to being UI bound. However, it is well worth noting that completion time slows down at a growing rate. The time it takes to calculate on 1,000,000 items, is substantially longer than the time it takes to calculate on 100,000 (x 10). 
+The workload does bog-down as size increases. And, it is well worth noting that completion time slows down at a growing rate. The time it takes to calculate on 1,000,000 items, is substantially longer than the time it takes to calculate on 100,000 (x 10). 
 
 
 
