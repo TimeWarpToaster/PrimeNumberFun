@@ -1,0 +1,9 @@
+D:\VSProjects2019\EratosthenesSieveByKind\bin\Debug\EratosthenesSieveByKind.exe.config
+D:\VSProjects2019\EratosthenesSieveByKind\bin\Debug\EratosthenesSieveByKind.exe
+D:\VSProjects2019\EratosthenesSieveByKind\bin\Debug\EratosthenesSieveByKind.pdb
+D:\VSProjects2019\EratosthenesSieveByKind\obj\Debug\EratosthenesSieveByKind.Form1.resources
+D:\VSProjects2019\EratosthenesSieveByKind\obj\Debug\EratosthenesSieveByKind.Properties.Resources.resources
+D:\VSProjects2019\EratosthenesSieveByKind\obj\Debug\EratosthenesSieveByKind.csproj.GenerateResource.cache
+D:\VSProjects2019\EratosthenesSieveByKind\obj\Debug\EratosthenesSieveByKind.csproj.CoreCompileInputs.cache
+D:\VSProjects2019\EratosthenesSieveByKind\obj\Debug\EratosthenesSieveByKind.exe
+D:\VSProjects2019\EratosthenesSieveByKind\obj\Debug\EratosthenesSieveByKind.pdb
