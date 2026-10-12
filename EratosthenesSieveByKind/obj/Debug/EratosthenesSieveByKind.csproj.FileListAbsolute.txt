@@ -7,3 +7,4 @@ D:\VSProjects2019\EratosthenesSieveByKind\obj\Debug\EratosthenesSieveByKind.cspr
 D:\VSProjects2019\EratosthenesSieveByKind\obj\Debug\EratosthenesSieveByKind.csproj.CoreCompileInputs.cache
 D:\VSProjects2019\EratosthenesSieveByKind\obj\Debug\EratosthenesSieveByKind.exe
 D:\VSProjects2019\EratosthenesSieveByKind\obj\Debug\EratosthenesSieveByKind.pdb
+D:\VSProjects2019\EratosthenesSieveByKind\obj\Debug\EratosthenesSieveByKind.csproj.AssemblyReference.cache

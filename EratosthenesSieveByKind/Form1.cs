@@ -195,6 +195,423 @@ namespace EratosthenesSieveByKind
             return retVal;
         }
 
+        public bool FermatMersenneExtended()
+        {
+            const string location = CLASSNAME + ".FermatMersenneExtended";
+            /*
+             * Executes all four Kinds, upto max index. Reads round-robbin into a merged
+             * string, then outputs to file at the end. 
+             */
+            bool retVal = false;
+            try
+            {
+                L.d(location, "Starting extended.");
+                if (!enableUi(false))
+                {
+                    L.err(location, "Failed to disable ui before beginning.");
+                }
+                int size = 100000;
+                if (tbMaxToProcess != null)
+                {
+                    try { size = Convert.ToInt32(tbMaxToProcess.Text); } catch (Exception ex) { }
+                }
+                this.maxToProcess = size;
+                tbMaxToProcess.Text = Convert.ToString(this.maxToProcess);
+
+
+                Task task = new Task(new Action(() =>
+                {
+                    try
+                    {
+                        BitArray ba1 = null;
+                        BitArray ba3 = null;
+                        BitArray ba7 = null;
+                        BitArray ba9 = null;
+
+                        this.xType = 1;
+                        if (!numericUpDown(numType, this.xType))
+                        {
+                            L.err(location, "Failed to update Kind before proceeding.");
+                            if (!enableUi(true)) L.err(location, "Failed to enable ui on error.");
+                            return;
+                        }
+                        Begin(false);
+                        if (this.ba != null && this.ba.Length > 0)
+                        {
+                            ba1 = deepCopy(ref this.ba, false);
+                        }
+                        this.ba = null;
+
+                        this.xType = 3;
+                        if (!numericUpDown(numType, this.xType))
+                        {
+                            L.err(location, "Failed to update Kind before proceeding.");
+                            if (!enableUi(true)) L.err(location, "Failed to enable ui on error.");
+                            return;
+                        }
+                        Begin(false);
+                        if (this.ba != null && this.ba.Length > 0)
+                        {
+                            ba3 = deepCopy(ref this.ba, false);
+                        }
+                        this.ba = null;
+
+                        this.xType = 7;
+                        if (!numericUpDown(numType, this.xType))
+                        {
+                            L.err(location, "Failed to update Kind before proceeding.");
+                            if (!enableUi(true)) L.err(location, "Failed to enable ui on error.");
+                            return;
+                        }
+                        Begin(false);
+                        if (this.ba != null && this.ba.Length > 0)
+                        {
+                            ba7 = deepCopy(ref this.ba, false);
+                        }
+                        this.ba = null;
+
+                        this.xType = 9;
+                        if (!numericUpDown(numType, this.xType))
+                        {
+                            L.err(location, "Failed to update Kind before proceeding.");
+                            if (!enableUi(true)) L.err(location, "Failed to enable ui on error.");
+                            return;
+                        }
+                        Begin(true);
+                        if (this.ba != null && this.ba.Length > 0)
+                        {
+                            ba9 = deepCopy(ref this.ba, false);
+                        }
+                        // leave it
+
+                        // Validate bitarrays 1-9
+                        string nullArrs = "";
+                        if (ba1 == null || ba1.Length == 0) nullArrs += (nullArrs.Length == 0 ? "" : ", ") + "ba1";
+                        if (ba3 == null || ba3.Length == 0) nullArrs += (nullArrs.Length == 0 ? "" : ", ") + "ba3";
+                        if (ba7 == null || ba7.Length == 0) nullArrs += (nullArrs.Length == 0 ? "" : ", ") + "ba7";
+                        if (ba9 == null || ba9.Length == 0) nullArrs += (nullArrs.Length == 0 ? "" : ", ") + "ba9";
+                        if (nullArrs.Length > 0)
+                        {
+                            L.err(location, "Some xType arrays were null (" + nullArrs + ").");
+                            if (!enableUi(true)) L.err(location, "Failed to enable ui on error.");
+                            return;// Early Exit
+                        }
+
+                        L.l(location, "Initializing counters.");
+
+                        int maxNum = ((size-1) * 10) + 9;
+                        int maxMuliplier = (int)(Math.Round(Math.Sqrt(maxNum), 0, MidpointRounding.ToEven));
+
+                        List<byte[]> scoreFermat = new List<byte[]>();
+                        List<byte[]> scoreMersenne = new List<byte[]>();
+                        List<bool> above = new List<bool>();
+                        List<bool> below = new List<bool>();
+
+                        // TODO - Change to maxMultiplier instead of maxNum
+                        for (int i = 0; i < maxNum; i++)
+                        {
+                            scoreFermat.Add(new byte[3] { 0, 0, 0 });
+                            scoreMersenne.Add(new byte[3] { 0, 0, 0 });
+                            above.Add(false);
+                            below.Add(false);
+                        }
+
+                        int maxIdx = this.maxToProcess - 1;
+
+                        // Admittedly, the code below looks odd. What is happening, there are 
+                        // four arrays, with equivalent indexes. Every increment of 10, is one
+                        // increment of index. Fermat is rolling forward over 9 to 1, and 
+                        // Merssene is rolling backwards, past 1 to 9. Fives are counted as zero 
+                        // (not prime). This should play out more-or-less evenly in the-end (3-each). 
+                        //
+                        // The output index of 0, 1, 2, indicates the number of arrays (incl 5)
+                        // above or below the calculated power of a number. Zero indicates 
+                        // not-prime, one indicates prime. The base index, represents the 
+                        // literal numeric base being raised to powers. 
+                        //
+                        // Once done, a count is performed, to see if prime counts taper-off
+                        // as position moves further from the actual power. There is a caveat, 
+                        // in that even numbers to power of self, will always result in even, 
+                        // and odd in odd. This means odd numbers will record one position 
+                        // further than even. An even at idx-2 will be 6-positions from the 
+                        // calculated number, and an odd idx-2 will be 5-positions distant. Fix,
+                        // this in the final result.
+                        //
+                        // In addition to Fermat and Mersenne, the values one above and one 
+                        // below are recorded. In theory, these should be fruitful for some
+                        // measure of distance as-well. Only recording one though. These
+                        // indexes are determined based upon a grid-width of 10. Currently, 
+                        // these values are being recorded for local-kind of the calculated 
+                        // power itself, meaning only powers of odd bases will be counted.
+                        //
+                        // Additionally, this sample only focuses on raising odd values. 
+                        // Half of the space is wasted in memory, as i represents even
+                        // and odd values. This was thrown together (...).
+
+
+                        L.l(location, "Processing powers of self.");
+
+                        // Focus on odds
+                        for (int i = 3; i <= maxMuliplier; i += 2)
+                        //for (int i = 3; i < maxNum; i += 2)
+                        {
+                            //if (((int)i % 10) == 5) continue;
+
+                            // Raise to power of self until maxNum
+                            for (long j = i * i; j < maxNum; j *= i)
+                            {
+                                // Get a number as j
+                                // Find out what table it belongs to
+                                int kind = (int)j % 10;
+
+                                // Get the index
+                                int idx = (int)j / 10 | 0;
+                                if (idx > maxIdx) continue;
+
+                                // We don't care if this number is prime
+
+                                // Look three odd numbers in each direction, rolling index at row-change
+                                switch (kind)
+                                {
+                                    case 1:
+                                        if (ba3[idx]) scoreFermat[i][0]++;
+                                        scoreFermat[i][1] = 0;//5
+                                        if (ba7[idx]) scoreFermat[i][2]++;
+
+                                        if (idx > 0 && ba9[idx - 1]) scoreMersenne[i][0]++;
+                                        if (idx > 0 && ba7[idx - 1]) scoreMersenne[i][1]++;
+                                        scoreMersenne[i][2] = 0;//5
+
+                                        if (idx > 9 && ba1[idx - 10]) above[i] = true;
+                                        if (idx < maxIdx - 10 && ba1[idx + 10]) below[i] = true; 
+                                        break;
+                                    case 3:
+                                        scoreFermat[i][0] = 0;//5
+                                        if (ba7[idx]) scoreFermat[i][1]++;
+                                        if (ba9[idx]) scoreFermat[i][2]++;
+
+                                        if (ba1[idx]) scoreMersenne[i][0]++;
+                                        scoreMersenne[i][1] = 0;//5
+                                        if (idx > 0 && ba9[idx - 1]) scoreMersenne[i][2]++;
+
+                                        if (idx > 9 && ba3[idx - 10]) above[i] = true;
+                                        if (idx < maxIdx - 10 && ba3[idx + 10]) below[i] = true;
+                                        break;
+                                    case 5:
+                                        if (ba7[idx]) scoreFermat[i][0]++;
+                                        if (ba9[idx]) scoreFermat[i][1]++;
+                                        if (idx < maxIdx && ba1[idx + 1]) scoreFermat[i][2]++;
+
+                                        if (ba3[idx]) scoreMersenne[i][0]++;
+                                        if (ba1[idx]) scoreMersenne[i][1]++;
+                                        if (idx > 0 && ba9[idx - 1]) scoreMersenne[i][2]++;
+
+                                        // Skip above and below for 5's, there are none
+                                        break;
+                                    case 7:
+                                        if (ba9[idx]) scoreFermat[i][0]++;
+                                        if (idx < maxIdx && ba1[idx + 1]) scoreFermat[i][1]++;
+                                        if (idx < maxIdx && ba3[idx + 1]) scoreFermat[i][2]++;
+
+                                        scoreMersenne[i][0] = 0;//5
+                                        if (ba3[idx]) scoreMersenne[i][1]++;
+                                        if (ba1[idx]) scoreMersenne[i][2]++;
+
+                                        if (idx > 9 && ba7[idx - 10]) above[i] = true;
+                                        if (idx < maxIdx - 10 && ba7[idx + 10]) below[i] = true;
+                                        break;
+                                    case 9:
+                                        if (idx < maxIdx && ba1[idx + 1]) scoreFermat[i][0]++;
+                                        if (idx < maxIdx && ba3[idx + 1]) scoreFermat[i][1]++;
+                                        scoreFermat[i][2] = 0;//5
+
+                                        if (ba7[idx]) scoreMersenne[i][0]++;
+                                        scoreMersenne[i][1]++;//5
+                                        if (ba3[idx]) scoreMersenne[i][2]++;
+
+                                        if (idx > 9 && ba9[idx - 10]) above[i] = true;
+                                        if (idx < maxIdx - 10 && ba9[idx + 10]) below[i] = true;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                        }
+
+
+                        L.l(location, "Calculating index scores as-is.");
+
+                        int[] totalFermat = new int[3] { 0, 0, 0 };
+                        int[] totalMersenne = new int[3] { 0, 0, 0 };
+                        int totalAbove = 0;
+                        int totalBelow = 0;
+
+
+                        for (int i = 3; i <= maxMuliplier; i += 2)
+                        //for (int i = 3; i <= maxNum; i += 2)
+                        {
+                            try
+                            {
+                                totalFermat[0] += scoreFermat[i][0];
+                                totalFermat[1] += scoreFermat[i][1];
+                                totalFermat[2] += scoreFermat[i][2];
+
+                                totalMersenne[0] += scoreMersenne[i][0];
+                                totalMersenne[1] += scoreMersenne[i][1];
+                                totalMersenne[2] += scoreMersenne[i][2];
+
+                                if (above[i]) totalAbove++;
+                                if (below[i]) totalBelow++;
+                            }
+                            catch (Exception exCount)
+                            {
+                                L.err(location, 
+                                    "Error scoring as-is. i (" + i + 
+                                    "), Fermat (" + (scoreFermat.Count - 1) + 
+                                    "), Mersenne max (" + (scoreMersenne.Count - 1) + 
+                                    "), maxMult (" + maxMuliplier + 
+                                    "), maxNum (" + maxNum + 
+                                    "), Error: " + exCount.Message + ".");
+                                break;
+                            }
+                        }
+
+                        L.l(location, 
+                            "Fermat-0 (" + totalFermat[0] + 
+                            "), Fermat-1 (" + totalFermat[1] + 
+                            "), Fermat-2 (" + totalFermat[2] + ").");
+                        L.l(location, 
+                            "Mersenne-0 (" + totalMersenne[0] + 
+                            "), Mersenne-1 (" + totalMersenne[1] + 
+                            "), Mersenne-2 (" + totalMersenne[2] + ").");
+                        L.l(location, "Above (" + totalAbove + ").");
+                        L.l(location, "Below (" + totalBelow + ").");
+
+
+
+
+                        L.l(location, "Calculating corrected scores.");
+
+                        int[] correctedFermat = new int[6] { 0, 0, 0, 0, 0, 0 };
+                        int[] correctedMersenne = new int[6] { 0, 0, 0, 0, 0, 0 };
+                        int correctedAbove = 0;
+                        int correctedBelow = 0;
+
+                        bool isOdd = false;
+                        for (int i = 3; i <= maxMuliplier; i += 2)
+                        //for (int i = 3; i <= maxNum; i += 2)
+                        {
+                            try
+                            {
+                                try
+                                {
+                                    if (!isOdd)
+                                    {
+                                        correctedFermat[0] += scoreFermat[i][0];
+                                        correctedFermat[2] += scoreFermat[i][1];
+                                        correctedFermat[4] += scoreFermat[i][2];
+
+                                        correctedMersenne[0] += scoreMersenne[i][0];
+                                        correctedMersenne[2] += scoreMersenne[i][1];
+                                        correctedMersenne[4] += scoreMersenne[i][2];
+                                    }
+                                    else
+                                    {
+                                        correctedFermat[1] += scoreFermat[i][0];
+                                        correctedFermat[3] += scoreFermat[i][1];
+                                        correctedFermat[5] += scoreFermat[i][2];
+
+                                        correctedMersenne[1] += scoreMersenne[i][0];
+                                        correctedMersenne[3] += scoreMersenne[i][1];
+                                        correctedMersenne[5] += scoreMersenne[i][2];
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    L.err(location,
+                                        "Error correcting." +
+                                        " i (" + i +
+                                        "), Fermat length (" + scoreFermat.Count +
+                                        "), Fermat[i] max (" + (scoreFermat.Count > i && scoreFermat[i] != null ?
+                                        Convert.ToString(scoreFermat[i].Length) : "Null or OOBi") +
+                                        "), Mersenne length (" + scoreMersenne.Count +
+                                        "), Mersenne[i] max (" + (scoreMersenne.Count > i && scoreMersenne[i] != null ?
+                                        Convert.ToString(scoreMersenne[i].Length) : "Null or OOBi") +
+                                        ").");
+                                    break;
+                                }
+
+
+                                // Technically, above and below are corrected already, only representing
+                                // odd values (no shifting). This piece is redundant.
+                                try
+                                {
+                                    if (above[i]) correctedAbove++;
+                                    if (below[i]) correctedBelow++;
+                                }
+                                catch (Exception exAboveBelow)
+                                {
+                                    L.err(location, "Above below error: " + exAboveBelow);
+                                }
+
+                                isOdd = !isOdd;
+                            }
+                            catch (Exception exCount)
+                            {
+                                L.err(location,
+                                    "Error correcting score. i (" + i +
+                                    "), Fermat (" + (scoreFermat.Count - 1) +
+                                    "), Mersenne max (" + (scoreMersenne.Count - 1) +
+                                    "), maxMult (" + maxMuliplier +
+                                    "), maxNum (" + maxNum +
+                                    "), Error: " + exCount.Message + ".");
+                                break;
+                            }
+                        }
+
+
+                        L.l(location,
+                            "Fermat + 1 (" + correctedFermat[0] +
+                            "), Fermat + 2 (" + correctedFermat[1] +
+                            "), Fermat + 3 (" + correctedFermat[2] +
+                            "), Fermat + 4 (" + correctedFermat[3] +
+                            "), Fermat + 5 (" + correctedFermat[4] +
+                            "), Fermat + 6 (" + correctedFermat[5] +
+                            ").");
+                        L.l(location,
+                            "Mersenne - 1 (" + correctedMersenne[0] +
+                            "), Mersenne - 2 (" + correctedMersenne[1] +
+                            "), Mersenne - 3 (" + correctedMersenne[2] +
+                            "), Mersenne - 4 (" + correctedMersenne[3] +
+                            "), Mersenne - 5 (" + correctedMersenne[4] +
+                            "), Mersenne - 6 (" + correctedMersenne[5] +
+                            ").");
+                        L.l(location, "Above (" + correctedAbove + ").");
+                        L.l(location, "Below (" + correctedBelow + ").");
+
+
+                    }
+                    catch (Exception exTask)
+                    {
+                        L.err(location, "Task error: " + exTask.Message);
+                        try
+                        {
+                            if (!enableUi(true)) L.err(location, "Failed to enable ui on error.");
+                        }
+                        catch (Exception exUi) { }
+                    }
+                }));
+                task.Start();
+
+                retVal = true;
+            }
+            catch (Exception ex)
+            {
+                L.ex(location, ex);
+            }
+            return retVal;
+        }
+
         public bool FormMergeList()
         {
             const string location = CLASSNAME + ".FormMergeList";
@@ -1396,6 +1813,23 @@ namespace EratosthenesSieveByKind
                 if (!toggleRadioButtons())
                 {
                     L.err(location, "Failed to toggle radio buttons.");
+                }
+            }
+            catch (Exception ex)
+            {
+                L.ex(location, ex);
+            }
+        }
+
+        private void btnFermatMersenneExtended_Click(object sender, EventArgs e)
+        {
+            const string location = CLASSNAME + ".btnFermatMersenneExtended_Click";
+            try
+            {
+                L.l(location, "Processing Fermat / Mersenne extended.");
+                if (!this.FermatMersenneExtended())
+                {
+                    L.err(location, "Failed to process Fermat / Mersenne numbers extended.");
                 }
             }
             catch (Exception ex)

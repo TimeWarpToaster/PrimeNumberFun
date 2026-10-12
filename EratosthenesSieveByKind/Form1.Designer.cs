@@ -58,6 +58,7 @@ namespace EratosthenesSieveByKind
             this.cbt1v3x7 = new System.Windows.Forms.CheckBox();
             this.cbt1v1x1 = new System.Windows.Forms.CheckBox();
             this.gbDock = new System.Windows.Forms.GroupBox();
+            this.lblKind = new System.Windows.Forms.Label();
             this.numType = new System.Windows.Forms.NumericUpDown();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tbWindowWidth = new System.Windows.Forms.TextBox();
@@ -69,20 +70,20 @@ namespace EratosthenesSieveByKind
             this.lblWindowWidth = new System.Windows.Forms.Label();
             this.tbWindowSize = new System.Windows.Forms.TextBox();
             this.lblWindowSize = new System.Windows.Forms.Label();
+            this.tabsData = new System.Windows.Forms.TabControl();
+            this.tabData = new System.Windows.Forms.TabPage();
+            this.lbData = new System.Windows.Forms.ListBox();
+            this.tabLogs = new System.Windows.Forms.TabPage();
+            this.lbLogs = new System.Windows.Forms.ListBox();
+            this.tabCompareOptions = new System.Windows.Forms.TabPage();
+            this.pnlCompareOptions = new System.Windows.Forms.Panel();
+            this.lblCompareRestrictions = new System.Windows.Forms.Label();
+            this.tbCompareInVal = new System.Windows.Forms.TextBox();
+            this.lblCompareInVal = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblKind = new System.Windows.Forms.Label();
-            this.tabCompareOptions = new System.Windows.Forms.TabPage();
-            this.pnlCompareOptions = new System.Windows.Forms.Panel();
-            this.lblCompareInVal = new System.Windows.Forms.Label();
-            this.tbCompareInVal = new System.Windows.Forms.TextBox();
-            this.lblCompareRestrictions = new System.Windows.Forms.Label();
-            this.tabLogs = new System.Windows.Forms.TabPage();
-            this.lbLogs = new System.Windows.Forms.ListBox();
-            this.tabData = new System.Windows.Forms.TabPage();
-            this.lbData = new System.Windows.Forms.ListBox();
-            this.tabsData = new System.Windows.Forms.TabControl();
+            this.btnFermatMersenneExtended = new System.Windows.Forms.Button();
             this.pnlApp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
             this.splitMain.Panel1.SuspendLayout();
@@ -96,12 +97,12 @@ namespace EratosthenesSieveByKind
             this.gbDock.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numType)).BeginInit();
             this.groupBox1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.tabsData.SuspendLayout();
+            this.tabData.SuspendLayout();
+            this.tabLogs.SuspendLayout();
             this.tabCompareOptions.SuspendLayout();
             this.pnlCompareOptions.SuspendLayout();
-            this.tabLogs.SuspendLayout();
-            this.tabData.SuspendLayout();
-            this.tabsData.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlApp
@@ -177,6 +178,7 @@ namespace EratosthenesSieveByKind
             // 
             // gbRuleSet
             // 
+            this.gbRuleSet.Controls.Add(this.btnFermatMersenneExtended);
             this.gbRuleSet.Controls.Add(this.btnMergeList);
             this.gbRuleSet.Controls.Add(this.cbDebugLogs);
             this.gbRuleSet.Controls.Add(this.cbt7v9x3);
@@ -434,6 +436,15 @@ namespace EratosthenesSieveByKind
             this.gbDock.TabIndex = 0;
             this.gbDock.TabStop = false;
             // 
+            // lblKind
+            // 
+            this.lblKind.AutoSize = true;
+            this.lblKind.Location = new System.Drawing.Point(6, 28);
+            this.lblKind.Name = "lblKind";
+            this.lblKind.Size = new System.Drawing.Size(48, 17);
+            this.lblKind.TabIndex = 2;
+            this.lblKind.Text = "Kind:  ";
+            // 
             // numType
             // 
             this.numType.Increment = new decimal(new int[] {
@@ -566,110 +577,17 @@ namespace EratosthenesSieveByKind
             this.lblWindowSize.TabIndex = 0;
             this.lblWindowSize.Text = "Window Size Count:";
             // 
-            // menuStrip1
+            // tabsData
             // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1305, 28);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
-            this.fileToolStripMenuItem.Text = "File";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // lblKind
-            // 
-            this.lblKind.AutoSize = true;
-            this.lblKind.Location = new System.Drawing.Point(6, 28);
-            this.lblKind.Name = "lblKind";
-            this.lblKind.Size = new System.Drawing.Size(48, 17);
-            this.lblKind.TabIndex = 2;
-            this.lblKind.Text = "Kind:  ";
-            // 
-            // tabCompareOptions
-            // 
-            this.tabCompareOptions.Controls.Add(this.pnlCompareOptions);
-            this.tabCompareOptions.Location = new System.Drawing.Point(4, 25);
-            this.tabCompareOptions.Name = "tabCompareOptions";
-            this.tabCompareOptions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCompareOptions.Size = new System.Drawing.Size(1049, 683);
-            this.tabCompareOptions.TabIndex = 3;
-            this.tabCompareOptions.Text = "Compare";
-            this.tabCompareOptions.UseVisualStyleBackColor = true;
-            // 
-            // pnlCompareOptions
-            // 
-            this.pnlCompareOptions.Controls.Add(this.lblCompareRestrictions);
-            this.pnlCompareOptions.Controls.Add(this.tbCompareInVal);
-            this.pnlCompareOptions.Controls.Add(this.lblCompareInVal);
-            this.pnlCompareOptions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCompareOptions.Location = new System.Drawing.Point(3, 3);
-            this.pnlCompareOptions.Name = "pnlCompareOptions";
-            this.pnlCompareOptions.Size = new System.Drawing.Size(1043, 677);
-            this.pnlCompareOptions.TabIndex = 0;
-            // 
-            // lblCompareInVal
-            // 
-            this.lblCompareInVal.AutoSize = true;
-            this.lblCompareInVal.Location = new System.Drawing.Point(53, 91);
-            this.lblCompareInVal.Name = "lblCompareInVal";
-            this.lblCompareInVal.Size = new System.Drawing.Size(95, 17);
-            this.lblCompareInVal.TabIndex = 0;
-            this.lblCompareInVal.Text = "Compare File:";
-            // 
-            // tbCompareInVal
-            // 
-            this.tbCompareInVal.Location = new System.Drawing.Point(56, 111);
-            this.tbCompareInVal.Name = "tbCompareInVal";
-            this.tbCompareInVal.Size = new System.Drawing.Size(784, 22);
-            this.tbCompareInVal.TabIndex = 1;
-            // 
-            // lblCompareRestrictions
-            // 
-            this.lblCompareRestrictions.AutoSize = true;
-            this.lblCompareRestrictions.Location = new System.Drawing.Point(53, 154);
-            this.lblCompareRestrictions.Name = "lblCompareRestrictions";
-            this.lblCompareRestrictions.Size = new System.Drawing.Size(208, 17);
-            this.lblCompareRestrictions.TabIndex = 2;
-            this.lblCompareRestrictions.Text = "Integer 32 only, space delimited";
-            // 
-            // tabLogs
-            // 
-            this.tabLogs.Controls.Add(this.lbLogs);
-            this.tabLogs.Location = new System.Drawing.Point(4, 25);
-            this.tabLogs.Name = "tabLogs";
-            this.tabLogs.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLogs.Size = new System.Drawing.Size(1049, 683);
-            this.tabLogs.TabIndex = 1;
-            this.tabLogs.Text = "Logs";
-            this.tabLogs.UseVisualStyleBackColor = true;
-            // 
-            // lbLogs
-            // 
-            this.lbLogs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbLogs.FormattingEnabled = true;
-            this.lbLogs.HorizontalScrollbar = true;
-            this.lbLogs.ItemHeight = 16;
-            this.lbLogs.Location = new System.Drawing.Point(3, 3);
-            this.lbLogs.Name = "lbLogs";
-            this.lbLogs.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lbLogs.Size = new System.Drawing.Size(1043, 677);
-            this.lbLogs.TabIndex = 0;
+            this.tabsData.Controls.Add(this.tabData);
+            this.tabsData.Controls.Add(this.tabLogs);
+            this.tabsData.Controls.Add(this.tabCompareOptions);
+            this.tabsData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabsData.Location = new System.Drawing.Point(0, 0);
+            this.tabsData.Name = "tabsData";
+            this.tabsData.SelectedIndex = 0;
+            this.tabsData.Size = new System.Drawing.Size(1057, 712);
+            this.tabsData.TabIndex = 0;
             // 
             // tabData
             // 
@@ -696,17 +614,111 @@ namespace EratosthenesSieveByKind
             this.lbData.Size = new System.Drawing.Size(1043, 677);
             this.lbData.TabIndex = 0;
             // 
-            // tabsData
+            // tabLogs
             // 
-            this.tabsData.Controls.Add(this.tabData);
-            this.tabsData.Controls.Add(this.tabLogs);
-            this.tabsData.Controls.Add(this.tabCompareOptions);
-            this.tabsData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabsData.Location = new System.Drawing.Point(0, 0);
-            this.tabsData.Name = "tabsData";
-            this.tabsData.SelectedIndex = 0;
-            this.tabsData.Size = new System.Drawing.Size(1057, 712);
-            this.tabsData.TabIndex = 0;
+            this.tabLogs.Controls.Add(this.lbLogs);
+            this.tabLogs.Location = new System.Drawing.Point(4, 25);
+            this.tabLogs.Name = "tabLogs";
+            this.tabLogs.Padding = new System.Windows.Forms.Padding(3);
+            this.tabLogs.Size = new System.Drawing.Size(1049, 683);
+            this.tabLogs.TabIndex = 1;
+            this.tabLogs.Text = "Logs";
+            this.tabLogs.UseVisualStyleBackColor = true;
+            // 
+            // lbLogs
+            // 
+            this.lbLogs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbLogs.FormattingEnabled = true;
+            this.lbLogs.HorizontalScrollbar = true;
+            this.lbLogs.ItemHeight = 16;
+            this.lbLogs.Location = new System.Drawing.Point(3, 3);
+            this.lbLogs.Name = "lbLogs";
+            this.lbLogs.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lbLogs.Size = new System.Drawing.Size(1043, 677);
+            this.lbLogs.TabIndex = 0;
+            // 
+            // tabCompareOptions
+            // 
+            this.tabCompareOptions.Controls.Add(this.pnlCompareOptions);
+            this.tabCompareOptions.Location = new System.Drawing.Point(4, 25);
+            this.tabCompareOptions.Name = "tabCompareOptions";
+            this.tabCompareOptions.Padding = new System.Windows.Forms.Padding(3);
+            this.tabCompareOptions.Size = new System.Drawing.Size(1049, 683);
+            this.tabCompareOptions.TabIndex = 3;
+            this.tabCompareOptions.Text = "Compare";
+            this.tabCompareOptions.UseVisualStyleBackColor = true;
+            // 
+            // pnlCompareOptions
+            // 
+            this.pnlCompareOptions.Controls.Add(this.lblCompareRestrictions);
+            this.pnlCompareOptions.Controls.Add(this.tbCompareInVal);
+            this.pnlCompareOptions.Controls.Add(this.lblCompareInVal);
+            this.pnlCompareOptions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlCompareOptions.Location = new System.Drawing.Point(3, 3);
+            this.pnlCompareOptions.Name = "pnlCompareOptions";
+            this.pnlCompareOptions.Size = new System.Drawing.Size(1043, 677);
+            this.pnlCompareOptions.TabIndex = 0;
+            // 
+            // lblCompareRestrictions
+            // 
+            this.lblCompareRestrictions.AutoSize = true;
+            this.lblCompareRestrictions.Location = new System.Drawing.Point(53, 154);
+            this.lblCompareRestrictions.Name = "lblCompareRestrictions";
+            this.lblCompareRestrictions.Size = new System.Drawing.Size(208, 17);
+            this.lblCompareRestrictions.TabIndex = 2;
+            this.lblCompareRestrictions.Text = "Integer 32 only, space delimited";
+            // 
+            // tbCompareInVal
+            // 
+            this.tbCompareInVal.Location = new System.Drawing.Point(56, 111);
+            this.tbCompareInVal.Name = "tbCompareInVal";
+            this.tbCompareInVal.Size = new System.Drawing.Size(784, 22);
+            this.tbCompareInVal.TabIndex = 1;
+            // 
+            // lblCompareInVal
+            // 
+            this.lblCompareInVal.AutoSize = true;
+            this.lblCompareInVal.Location = new System.Drawing.Point(53, 91);
+            this.lblCompareInVal.Name = "lblCompareInVal";
+            this.lblCompareInVal.Size = new System.Drawing.Size(95, 17);
+            this.lblCompareInVal.TabIndex = 0;
+            this.lblCompareInVal.Text = "Compare File:";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1305, 28);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(116, 26);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // btnFermatMersenneExtended
+            // 
+            this.btnFermatMersenneExtended.Location = new System.Drawing.Point(6, 208);
+            this.btnFermatMersenneExtended.Name = "btnFermatMersenneExtended";
+            this.btnFermatMersenneExtended.Size = new System.Drawing.Size(200, 27);
+            this.btnFermatMersenneExtended.TabIndex = 32;
+            this.btnFermatMersenneExtended.Text = "Fermat Mersenne Extended";
+            this.btnFermatMersenneExtended.UseVisualStyleBackColor = true;
+            this.btnFermatMersenneExtended.Click += new System.EventHandler(this.btnFermatMersenneExtended_Click);
             // 
             // Form1
             // 
@@ -734,14 +746,14 @@ namespace EratosthenesSieveByKind
             ((System.ComponentModel.ISupportInitialize)(this.numType)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.tabsData.ResumeLayout(false);
+            this.tabData.ResumeLayout(false);
+            this.tabLogs.ResumeLayout(false);
             this.tabCompareOptions.ResumeLayout(false);
             this.pnlCompareOptions.ResumeLayout(false);
             this.pnlCompareOptions.PerformLayout();
-            this.tabLogs.ResumeLayout(false);
-            this.tabData.ResumeLayout(false);
-            this.tabsData.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -802,6 +814,7 @@ namespace EratosthenesSieveByKind
         private System.Windows.Forms.Label lblCompareRestrictions;
         private System.Windows.Forms.TextBox tbCompareInVal;
         private System.Windows.Forms.Label lblCompareInVal;
+        private System.Windows.Forms.Button btnFermatMersenneExtended;
     }
 }
 
