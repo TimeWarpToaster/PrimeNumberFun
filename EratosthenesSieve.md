@@ -45,7 +45,7 @@ Without taking things too far, each series of equations (for instance 11 x Kind-
 
 What it means, for such an equation to produce squares, is that Kind-1 and Kind-9, should produce more primes than Kind-3 or Kind-7. By deductive reasoning, we can study the square rays briefly. Each ray containing its own square, also contains its own cube, quad, etcetera. What these represent, are independent, and diverging rays, that recoalesce on the same points with regular frequency. Meaning, more of their multiples are redundant. In areas where multiple square or cube containing rays themselves coalesce, there should be a surplus of primes in the nearby sievable area. Frankly, there are a finite number of rays that have been emitted upto any particular number in space. If multiple rays are colliding, particularly at super-junctions, such as when cinque combines with its own quad, cube, and square (four rays in one place), there are fewer rays to consume the surrounding neighbors. 
 
-This may explain some of the alure of Fermat's 2<sup>N</sup> + 1 and Messene's 2<sup>N</sup> - 1. If the full Eratosthenes sieve were used, including all numbers, even and odd, 2<sup>N</sup> is not a random number or ray. 2<sup>N</sup> is a both the point on a ray belonging to N, the emerging origin point of a new ray that will not cross again until 2<sup>N+1</sup>, and only at the very precise point where all pre-existing child-rays of 2<sup>N</sup> coalesce with it. A ray 2<sup>N</sup>, will always emerge on ray N, and will always land on points along with all 2<sup>N</sup> rays 2<sup>1</sup> - 2<sup>N-1</sup>. This is important. 
+This may explain some of the alure of Fermat's 2<sup>N</sup> + 1 and Merssene's 2<sup>N</sup> - 1. If the full Eratosthenes sieve were used, including all numbers, even and odd, 2<sup>N</sup> is not a random number or ray. 2<sup>N</sup> is a both the point on a ray belonging to N, the emerging origin point of a new ray that will not cross again until 2<sup>N+1</sup>, and only at the very precise point where all pre-existing child-rays of 2<sup>N</sup> coalesce with it. A ray 2<sup>N</sup>, will always emerge on ray N, and will always land on points along with all 2<sup>N</sup> rays 2<sup>1</sup> - 2<sup>N-1</sup>. This is important. 
 
 What I am saying, is their equations are much broader in implication, when considered as rays in an Eratosthenes sieve. The implication is that 3<sup>N</sup>+/-1 and 4<sup>N</sup>+/-1, or any considerably useful base, should exhibit the same qualities and characteristics of 2<sup>N</sup>+/-1. Furthermore, once considered as rays, it is possible to logically conceive that 2<sup>N</sup>+/-3, should have a lower yield rate that 2<sup>N</sup>+/-1, but still have a higher yield rate than average. This is due to the localized vacuum of multiples created, when many rays combine at the same location. Namely n<sup>N</sup> rays (squares, cubes, quads, so-on).
 
@@ -77,5 +77,80 @@ A couple odd rules apply. No ray ever comes from 1, it defeats the purpose. Ther
 
 Additionally, ...3 x ...7 is not the same thing as ...7 x ...3. They produce different results. You must run both when looking for only primes. If you want to know, matrix multiplication is non-commutative. Meaning simply, that they cannot be reversed in the way singular expression multiplication can. To take 13 x all of Kind-7, produces a set of results, all of them right. However, all of Kind-7 x 13 also produces a set, containing some results that are part of 13 x K7, and missing others, also all right results for the condition. There is substantial overlap in the results, but not absolute. Look at it this way, in the sieve for K3 x K7, every third-item is crossed off. In the sieve for K7 x K3, every seventh item is crossed off. Every seventh is clearly not the same as every third, they are allowed to miss often, and both still be right.
 
+
+
+## Fermat Mersenne Extended
+
+I decided to go a step further, and attempt to substantiate the former conjecture, that rays emerging from powers of self, have an improved chance of nearby primes, by codifying the process. However, I stopped a step short, in not counting nearby values of numbers not raised to powers (no comparison against norm). Furthermore, the test code focuses solely on odd numbers raised to powers. Kind-of defeats the purpose, but even-so, the early result was unexpected. 
+
+In an attempt to be clear, what is calculated are Fermat and Mersenne numbers, in extended form, for all numbers where in n^N, n is an odd number smaller than square-root of max, and N is every number from 2 through where the result is greater than max.
+
+What was unexpected, is the top winner of +/- values was +/- 3 and 4, not +/- 1 or 2. I am confident Fermat and Mersenne would have found this easily, had they had the computing power of today, which is why I am comfortable calling this a simple extension of their existing formulas.  
+
+Also tallied, are primes that result from n^N +/-10, which represents the values directly above and below n^N, in a grid of 10-width. In concept, according the intercept of all rays of n^N falling on same points, above and below should enjoy some benefit of additional primes as-well. What I found, is -10 (above graphically in this case) performed abysmally, while +10 performed admirably... outperforming even +/- 3 and 4. 
+
+To perform your own analysis, use the &quot;Fermat Mersenne Extended&quot; button after setting Max To Process. What will happen, is it will calculate all four equations for all four kinds, as separate arrays in memory, then walk the positions forwards and back to get counts of primes for each distance from the calculated value. Understand, this is time consuming. When Max To Process is set to 100000, you should see completion within a minute or two. For 1M, expect 10-20 minutes, and it looks like 10M (i.e. numbers smaller than 100,000,000), it looks like it will take me 10-16 hours (still running).
+
+This code was thrown together quickly. I hope someone has the time and opportunity to make something cleaner, and see how close or far the values below are.
+
+
+
+<pre>
+Prime counts for all numbers smaller than 1,000,000
+
+Fermat Numbers:
+ +1: 34
+ +2: 46
+ +3: 70
+ +4: 60
+ +5: 25
+ +6: 33
+Ttl: 268
+
+
+Mersenne Numbers:
+ -1: 84
+ -2: 80
+ -3: 108
+ -4: 107
+ -5: 42
+ -6: 51
+Ttl: 472
+
+
+Above / Below
+-10: 11
++10: 166
+
+
+
+
+Prime counts for all numbers smaller than 10,000,000
+
+Fermat Numbers:
+ +1: 86
+ +2: 98
+ +3: 171
+ +4: 168
+ +5: 91
+ +6: 87
+Ttl: 701
+
+
+Mersenne Numbers:
+ -1: 219
+ -2: 242
+ -3: 324
+ -4: 330
+ -5: 122
+ -6: 127
+Ttl: 1364
+
+
+Above / Below
+-10: 27
++10: 429
+</pre>
+  
 <br />
 <br />
