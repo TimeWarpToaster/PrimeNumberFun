@@ -93,6 +93,8 @@ To perform your own analysis, use the &quot;Fermat Mersenne Extended&quot; butto
 
 This code was thrown together quickly. I hope someone has the time and opportunity to make something cleaner, and see how close or far the values below are.
 
+Addendum to the note above and counts below:  There is an error that occurs in the form of redundancy. Because of the volume of overall numbers being looked at, specific prime values are not tracked separately. As a hypothetical example, let suppose that 3^6 + 3 was prime, it would mean the rays for 3^5,4,3, and 2, also found and counted the same +3 value at the same position prime as-well, when they passed by, having also landed on the same point. Truly accurate counts would require separation and elimination of redundant finds. Still interesting however, is the overall high-performance of +10.
+
 
 
 <pre>
